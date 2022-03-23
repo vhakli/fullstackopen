@@ -1,0 +1,12 @@
+title Kaavio
+
+note over selain:
+käyttäjä painaa save nappia
+viesti tulee heti näkyviin
+end note
+selain->palvelin: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+selain-->palvelin: {"content":"rippistä","date":"2022-03-23T16:58:13.035Z"}
+note over palvelin:
+palvelin kuittaa viestin vastaanotetuksi
+end note
+palvelin-->selain: {"message":"note created"}

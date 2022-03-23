@@ -1,0 +1,30 @@
+title Kaavio
+
+note over selain:
+selain lähettää lomakkeen tiedot 
+palvelimelle POST kutsulla
+end note
+selain->palvelin: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+note over palvelin
+palvelin tallentaa viestin tietokantaan
+end note
+palvelin-->selain: Palvelin lähettää uudelleenohjauspyynnön
+note over selain:
+tässä kohtaa sivu ladataan uudestaan kuin
+sinne vierailtaisiin ensimmäistä kertaa
+end note
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+palvelin-->selain: HTML-koodi
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+palvelin-->selain: main.css
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+palvelin-->selain: main.js
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+note over palvelin:
+palvelimen palauttama data sisältää
+nyt myös äsken lähetetyn viestin
+end note
+palvelin-->selain: [{ content: "Hblaalbaa", date: "2019-01-01" }, ...]
+note over selain:
+selain renderöi muistiinpanot ruudulle
+end note
