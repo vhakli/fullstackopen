@@ -22,7 +22,7 @@ const App = () => {
   const Content = ({ parts }) => (
     <>
       {parts.map((part) => (
-        <Part part={part} />
+        <Part key={part.name} part={part} />
       ))}
     </>
   );
@@ -43,11 +43,11 @@ const App = () => {
   );
 
   return (
-    <div>
+    <>
       <Header course={course} />
       <Content parts={course.parts} />
       <Total parts={course.parts} />
-    </div>
+    </>
   );
 };
 
