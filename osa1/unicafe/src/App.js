@@ -5,14 +5,18 @@ const Statistics = (props) => {
   return (
     <>
       <h1>statistics</h1>
-      <ul>
-        <li>good {good}</li>
-        <li>neutral {neutral}</li>
-        <li>bad {bad}</li>
-        <li>all {good + neutral + bad}</li>
-        <li>average {(good - bad) / (good + neutral + bad) || 0}</li>
-        <li>positive {(good / (good + neutral + bad)) * 100 || 0} %</li>
-      </ul>
+      {good === 0 && neutral === 0 && bad === 0 ? (
+        <p>No feedback given</p>
+      ) : (
+        <ul>
+          <li>good {good}</li>
+          <li>neutral {neutral}</li>
+          <li>bad {bad}</li>
+          <li>all {good + neutral + bad}</li>
+          <li>average {(good - bad) / (good + neutral + bad) || 0}</li>
+          <li>positive {(good / (good + neutral + bad)) * 100 || 0} %</li>
+        </ul>
+      )}
     </>
   );
 };
