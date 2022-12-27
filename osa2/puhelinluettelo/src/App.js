@@ -1,5 +1,54 @@
 import { useState } from "react";
 
+const Filter = ({ value, onChange }) => {
+  return (
+    <div>
+      filter shown with <input value={value} onChange={onChange} />
+    </div>
+  );
+};
+
+const PersonForm = ({
+  newName,
+  setNewName,
+  newNumber,
+  setNewNumber,
+  handleSubmit,
+}) => {
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        name:{" "}
+        <input value={newName} onChange={(e) => setNewName(e.target.value)} />
+      </div>
+      <div>
+        number:{" "}
+        <input
+          value={newNumber}
+          onChange={(e) => setNewNumber(e.target.value)}
+        />
+      </div>
+      <div>
+        <button type="submit">add</button>
+      </div>
+    </form>
+  );
+};
+
+const Persons = ({ persons, search }) => {
+  return (
+    <>
+      {persons
+        .filter((person) => person.name.toLowerCase().includes(search))
+        .map((person) => (
+          <p key={person.name}>
+            {person.name} {person.number}
+          </p>
+        ))}
+    </>
+  );
+};
+
 const App = () => {
   const [persons, setPersons] = useState([
     { name: "Arto Hellas", number: "040-123456" },
@@ -26,35 +75,17 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <div>
-        filter shown with{" "}
-        <input value={search} onChange={(e) => setSearch(e.target.value)} />
-      </div>
-      <h2>add a new</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          name:{" "}
-          <input value={newName} onChange={(e) => setNewName(e.target.value)} />
-        </div>
-        <div>
-          number:{" "}
-          <input
-            value={newNumber}
-            onChange={(e) => setNewNumber(e.target.value)}
-          />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-      {persons
-        .filter((person) => person.name.toLowerCase().includes(search))
-        .map((person) => (
-          <p key={person.name}>
-            {person.name} {person.number}
-          </p>
-        ))}
+      <Filter value={search} onChange={(e) => setSearch(e.target.value)} />
+      <h3>add a new</h3>
+      <PersonForm
+        handleSubmit={handleSubmit}
+        newName={newName}
+        newNumber={newNumber}
+        setNewName={setNewName}
+        setNewNumber={setNewNumber}
+      />
+      <h3>Numbers</h3>
+      <Persons persons={persons} search={search} />
     </div>
   );
 };
